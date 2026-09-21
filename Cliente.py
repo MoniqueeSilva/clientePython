@@ -4,7 +4,7 @@ import socket
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Conecta ao servidor
-cliente.connect(("192.168.68.107", 12345))
+cliente.connect(("localhost", 12345))
 
 print("conectado")
 
