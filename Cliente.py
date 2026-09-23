@@ -6,18 +6,35 @@ cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Conecta ao servidor
 cliente.connect(("192.168.68.107", 12345))
 
-print("conectado")
+print("CONECTADO AO SERVIDOR")
 
-while True:
-    mensagem = input()
+executa = True
 
-    # Envia a mensagem para o servidor
-    cliente.sendall((mensagem + "\n").encode())
+while executa:
+    print("\n - MENU -")
+    print("1- Somar")
+    print("2- Subtrair")
+    print("3- Multiplicar")
+    print("4- Enviar imagem")
+    print("0- Encerrar conexão")
 
-    # Recebe a resposta do servidor
-    resposta = cliente.recv(1024).decode()
+    opcao = input("ECOLHA UMA OPÇÃO: ")
 
-    print(resposta, end="")
+    match opcao:
+        case "1":
+            print("Somar selecionado.")
 
-# Fecha a conexão
+        case "2":
+            print("Subtrair selecionado.")
+
+        case "3":
+            print("Multiplicar selecionado.")
+
+        case "4":
+            print("Envio de imagem selecionado .")
+
+        case "0":
+            print("Encerrando conexão...")
+            executa = False
+
 cliente.close()
