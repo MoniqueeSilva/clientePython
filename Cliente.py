@@ -37,4 +37,16 @@ while executa:
             print("Encerrando conexão...")
             executa = False
 
+    # Envia a opção escolhida para o servidor
+    cliente.sendall((mensagem + "\n").encode())
+
+    # Se escolheu 0, encerra o cliente
+    if opcao == "0":
+        print("Conexão encerrada.")
+        break
+
+    # Recebe a resposta do servidor
+    resposta = cliente.recv(1024).decode()
+    print(resposta, end="")
+
 cliente.close()
