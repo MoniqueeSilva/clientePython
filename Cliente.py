@@ -38,7 +38,7 @@ while executa:
             executa = False
 
     # Envia a opção escolhida para o servidor
-    cliente.sendall((mensagem + "\n").encode())
+    cliente.sendall((opcao + "\n").encode())
 
     # Se escolheu 0, encerra o cliente
     if opcao == "0":
