@@ -1,11 +1,7 @@
 import socket
 
-# Cria o socket TCP
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Conecta ao servidor
 cliente.connect(("localhost", 12345))
-
 print("CONECTADO AO SERVIDOR")
 
 executa = True
@@ -18,31 +14,28 @@ while executa:
     print("4- Enviar imagem")
     print("0- Encerrar conexão")
 
-    opcao = input("ECOLHA UMA OPÇÃO: ")
+    opcao = input("ESCOLHA UMA OPÇÃO: ")
 
-    match opcao:
-        case "1":
-            print("Somar selecionado.")
+    # Monta a mensagem no formato CODIGO|NUM1,NUM2
+    if opcao in ("1", "2", "3"):
+        num1 = input("Digite o primeiro número: ")
+        num2 = input("Digite o segundo número: ")
+        mensagem = f"{opcao}|{num1},{num2}"
+    elif opcao == "4":
+        mensagem = "4|"
+    elif opcao == "0":
+        mensagem = "0|"
+        executa = False
+    else:
+        print("Opção inválida. Tente novamente.")
+        continue  # volta para o início do while sem enviar nada
 
-        case "2":
-            print("Subtrair selecionado.")
+    # Envia a mensagem para o servidor
+    cliente.sendall((mensagem + "\n").encode())
 
-        case "3":
-            print("Multiplicar selecionado.")
-
-        case "4":
-            print("Envio de imagem selecionado .")
-
-        case "0":
-            print("Encerrando conexão...")
-            executa = False
-
-    # Envia a opção escolhida para o servidor
-    cliente.sendall((opcao + "\n").encode())
-
-    # Se escolheu 0, encerra o cliente
+    # Se for encerrar, sai do loop sem esperar resposta
     if opcao == "0":
-        print("Conexão encerrada.")
+        print("Encerrando conexão...")
         break
 
     # Recebe a resposta do servidor
@@ -50,3 +43,4 @@ while executa:
     print(resposta, end="")
 
 cliente.close()
+print("Conexão encerrada.")
