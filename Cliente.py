@@ -2,6 +2,12 @@ import socket
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 cliente.connect(("localhost", 12345))
+# lê a mensagem de boas-vindas do servidor
+mensagem_inicial = cliente.recv(1024).decode().strip()
+if mensagem_inicial.startswith("ERRO"):
+    print(mensagem_inicial)
+    cliente.close()
+    exit()
 print("CONECTADO AO SERVIDOR")
 
 executa = True
