@@ -1,14 +1,38 @@
 import socket
+import time
 
-cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-cliente.connect(("localhost", 12345))
-# lê a mensagem de boas-vindas do servidor
-mensagem_inicial = cliente.recv(1024).decode().strip()
-if mensagem_inicial.startswith("ERRO"):
-    print(mensagem_inicial)
-    cliente.close()
+# Configurações de reconexão
+MAX_TENTATIVAS = 30      # tenta até 30 vezes
+INTERVALO_ESPERA = 2     # espera 2 segundos entre tentativas
+
+def conectar_ao_servidor():
+    for tentativa in range(1, MAX_TENTATIVAS + 1):
+        try:
+            cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            cliente.connect(("localhost", 12345))
+
+            mensagem_inicial = cliente.recv(1024).decode().strip()
+
+            if mensagem_inicial.startswith("OK"):
+                print("CONECTADO AO SERVIDOR")
+                return cliente
+
+            # Servidor cheio — aguarda e tenta novamente
+            print(f"[Tentativa {tentativa}/{MAX_TENTATIVAS}] Servidor cheio. Aguardando {INTERVALO_ESPERA}s...")
+            cliente.close()
+            time.sleep(INTERVALO_ESPERA)
+
+        except (ConnectionRefusedError, OSError):
+            print(f"[Tentativa {tentativa}/{MAX_TENTATIVAS}] Servidor indisponível. Aguardando...")
+            time.sleep(INTERVALO_ESPERA)
+
+    return None  # esgotou as tentativas
+
+
+cliente = conectar_ao_servidor()
+if cliente is None:
+    print("Não foi possível conectar após várias tentativas. Encerrando.")
     exit()
-print("CONECTADO AO SERVIDOR")
 
 executa = True
 
