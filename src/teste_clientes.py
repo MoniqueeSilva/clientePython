@@ -76,7 +76,7 @@ def executar_cliente(id_cliente):
 
 # EXECUÇÃO DO TESTE
 def main():
-    print("      TESTE DE MÚLTIPLOS CLIENTES")
+    print("TESTE DE MÚLTIPLOS CLIENTES")
     print(f"Quantidade de clientes: " f"{QUANTIDADE_CLIENTES}")
     print()
 

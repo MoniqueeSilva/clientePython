@@ -4,7 +4,7 @@ from imagem import processar_imagem
 
 
 def main():
-    cliente = conectar_ao_servidor()
+    cliente = conectar_ao_servidor() # Estabelece conexão com o servidor e guarda o socket retornado
 
     if cliente is None:
         print("Não foi possível conectar. Encerrando.")
@@ -12,18 +12,18 @@ def main():
 
     try:
         while True:
-            opcao = mostrar_menu()
-            mensagem = criar_mensagem(opcao)
+            opcao = mostrar_menu() 
+            mensagem = criar_mensagem(opcao) # Converte a opção escolhida em uma mensagem para enviar ao servidor
 
             if mensagem is None:
                 continue
 
-            cliente.sendall((mensagem + "\n").encode())
+            cliente.sendall((mensagem + "\n").encode()) # Envia mensagem ao servidor codificada em bytes
 
             if opcao == "0":
                 break
 
-            resposta = receber_mensagem(cliente)
+            resposta = receber_mensagem(cliente) # Aguarda e recebe a resposta enviada pelo servidor
 
             if opcao == "4":
                 processar_imagem(resposta)
