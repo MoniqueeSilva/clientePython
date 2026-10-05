@@ -2,7 +2,8 @@ import base64
 import subprocess
 import os
 
-CAMINHO_IMAGEM = "imagem_recebida.jpg"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CAMINHO_IMAGEM = os.path.join(BASE_DIR, "imagem_recebida.jpg")
 
 def processar_imagem(resposta):
     if not resposta.startswith("IMAGEM|"):
