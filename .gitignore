@@ -2,3 +2,6 @@
 .vscode/
 __pycache__/
 *.pyc
+
+imagem_recebida.jpg
+*.jpg
