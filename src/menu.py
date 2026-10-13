@@ -28,7 +28,7 @@ def criar_mensagem(opcao):
     if opcao == "5":
         nome = input("Nome do aluno: ")
         matricula = input("Matricula: ")
-        curso = input("Curso")
+        curso = input("Curso: ")
         return {
             "nome": nome,
             "matricula": matricula,

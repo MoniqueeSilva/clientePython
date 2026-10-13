@@ -1,8 +1,8 @@
 import socket
 import time
 
-HOST = "10.10.136.139"
-PORTA = 12346
+HOST = "localhost"
+PORTA = 12345
 
 MAX_TENTATIVAS = 30
 INTERVALO_ESPERA = 2

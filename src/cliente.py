@@ -1,6 +1,7 @@
 from conexao import conectar_ao_servidor, receber_mensagem
 from menu import mostrar_menu, criar_mensagem
 from imagem import processar_imagem
+from serializacao_aluno import enviar_aluno
 
 
 def main():
@@ -16,6 +17,12 @@ def main():
             mensagem = criar_mensagem(opcao) # Converte a opção escolhida em uma mensagem para enviar ao servidor
 
             if mensagem is None:
+                continue
+
+            if opcao == "5":
+                enviar_aluno(cliente, mensagem)
+                resposta = receber_mensagem(cliente)
+                print("Servidor: ", resposta)
                 continue
 
             cliente.sendall((mensagem + "\n").encode()) # Envia mensagem ao servidor codificada em bytes
