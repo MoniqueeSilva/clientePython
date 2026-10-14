@@ -1,13 +1,12 @@
-
 import javaobj.v3 as javaobj
 
 from javaobj.constants import ClassDescFlags
 from javaobj.v3.beans import (
-    FieldType,
-    JavaClassDesc,
-    JavaField,
-    JavaInstance,
-    JavaString,
+    FieldType, #descreve um campo
+    JavaClassDesc, #descreve uma classe
+    JavaField, #informa o tipo do campo
+    JavaInstance, #representa o obj
+    JavaString, #representa valores do tipo texto no formato de serialização Java
 )
 
 
