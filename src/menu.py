@@ -4,7 +4,7 @@ def mostrar_menu():
     print("2 - Subtrair")
     print("3 - Multiplicar")
     print("4 - Enviar Imagem")
-    print("5 - Enviar informações do aluno")
+    print("5 - Enviar Objeto")
     print("0 - Encerrar conexão")
     return input("ESCOLHA UMA OPÇÃO: ")
 
@@ -26,6 +26,7 @@ def criar_mensagem(opcao):
         return "4|"
 
     if opcao == "5":
+        print("Envio de objeto selecionado.")
         nome = input("Nome do aluno: ")
         matricula = input("Matricula: ")
         curso = input("Curso: ")
